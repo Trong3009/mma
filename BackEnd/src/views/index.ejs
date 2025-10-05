@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Danh sách người dùng</title>
+</head>
+<body>
+  <h1>Danh sách người dùng</h1>
+  <table boeder="1">
+    <tr>
+      <th>ID</th>
+      <th>Tên</th>
+      <th>Tài khoản</th>
+      <th>Email</th>
+      <th>SĐT</th>
+      <th>Giới tính</th>
+      <th>Địa chỉ</th>
+      <th>Ngày sinh</th>
+      <th>Ngày tạo</th>
+      <th>Cập nhật</th>
+    </tr>
+    <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.USER_ID %></td>
+        <td><%= u.USER_NAME %></td>
+        <td><%= u.USERNAME %></td>
+        <td><%= u.EMAIL %></td>
+        <td><%= u.PHONE %></td>
+        <td><%= u.GENDER === 1 ? 'Nam' : 'Nữ' %></td>
+        <td><%= u.ADDRESS %></td>
+        <td><%= u.BIRTH_OF_DAY ? u.BIRTH_OF_DAY.toISOString().split('T')[0] : '' %></td>
+        <td><%= u.CREATED_AT %></td>
+        <td><%= u.UPDATED_AT %></td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
