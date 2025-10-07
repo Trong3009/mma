@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    /* ---- Cấu hình module ---- */
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "moduleDetection": "force",
+
+    /* ---- Đầu ra & thư mục ---- */
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+
+    /* ---- Kiểm tra & type safety ---- */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* ---- JSX (nếu có React) ---- */
+    "jsx": "react-jsx",
+
+    /* ---- ESM hỗ trợ ---- */
+    "verbatimModuleSyntax": false,   // ❗ tắt dòng này để không bị lỗi ESM/CommonJS
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+
+    /* ---- Đường dẫn types ---- */
+    "types": [],
+    "typeRoots": ["./src/types", "./node_modules/@types"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+
