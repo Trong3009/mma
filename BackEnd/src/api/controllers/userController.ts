@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import * as userService from "../services/userService.js";
+import * as userService from "../../domain/services/userService.js";
 
 /**
  * Lấy danh sách người dùng
