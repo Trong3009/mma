@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "marketing",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "local": "cross-env NODE_ENV=local nodemon src/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
-    "prod": "cross-env NODE_ENV=production nodemon src/index.js"
+    "local": "cross-env NODE_ENV=local tsx watch src/index.ts",
+    "dev": "cross-env NODE_ENV=development tsx watch src/index.ts",
+    "prod": "cross-env NODE_ENV=production tsx src/index.ts"
   },
   "keywords": [
     "nodejs"
@@ -15,6 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@oracle/quicksql": "^1.2.15",
+    "@types/bcryptjs": "^2.4.6",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.3",
     "ejs": "3.1.10",
     "express": "^5.1.0",
@@ -22,6 +26,11 @@
     "oracledb": "^6.9.0"
   },
   "devDependencies": {
-    "cross-env": "10.1.0"
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.6.2",
+    "cross-env": "10.1.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   }
 }
