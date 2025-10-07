@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import express from "express";
-import userRoutes from "./routes/web.js"; // Đường dẫn router đã đổi
-import { initPool } from "./constant/databaseConnection.js";
-import { readOnly } from "./config/readPublic.js";
+import userRoutes from "./domain/routes/web.js"; // Đường dẫn router đã đổi
+import { initPool } from "./application/constant/databaseConnection.js";
+import { readOnly } from "./application/config/readPublic.js";
 
 // 🔧 Load .env theo môi trường
 dotenv.config({

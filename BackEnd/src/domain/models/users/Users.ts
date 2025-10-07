@@ -1,12 +1,14 @@
 import bcrypt from 'bcryptjs';
 import { randomUUID } from 'crypto';
+import { IEntity } from '../../../application/core/IEntity.js';
 
-export interface IUser {
-  id?: string; // UUID dạng string
+export interface IUser extends IEntity<string> {
   username: string;
   password: string; // Mật khẩu gốc, sẽ hash khi tạo
   name?: string;
   address?: string;
+  gender?: number;
+  birthdate?: Date;
   phone?: string;
   email?: string;
   role?: number; // 1 = admin, 2 = manager, 3 = customer

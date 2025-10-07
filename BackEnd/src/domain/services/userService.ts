@@ -1,4 +1,4 @@
-import { UserRepository } from "../repositories/userRepository.js";
+import { UserRepository } from "../../application/repositories/UserRepository.js";
 import type { IUser } from "../models/users/Users.js";
 
 const userRepo = new UserRepository();
