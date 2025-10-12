@@ -1,28 +1,31 @@
-import { UserRepository } from "../../application/repositories/UserRepository.js";
-import type { IUser } from "../models/users/Users.js";
 
-const userRepo = new UserRepository();
+import { IUserRepository } from "../../application/repositories/interfaces/IUserRepository.js";
+import type { IUser, Users } from "../models/users/Users.js";
+import { CrudService } from "./interfaces/base/ICrudService.js";
+import { IUserService } from "./interfaces/IUserService.js";
 
-/**
- * Lấy danh sách tất cả người dùng
- */
-export async function getUsers(): Promise<Pick<IUser, "username">[]> {
-  const users = await userRepo.getAllUsers();
-  return users.map(u => ({
-    username: u.username,
-  }));
-}
+export class UserService extends CrudService<IUser, string, Users> implements IUserService{
 
-/**
- * Tạo người dùng mới hoặc cập nhật mật khẩu nếu username đã tồn tại
- */
-export async function createUser(data: IUser): Promise<{ message: string }> {
-  if (!data.username || !data.password) {
-    throw new Error("Thiếu thông tin username hoặc password!");
+  protected repository: IUserRepository;
+
+  constructor(repository: IUserRepository) {
+    super();
+    this.repository = repository;
   }
 
-  // Gọi repo để insert hoặc update
-  const result = await userRepo.insertOrUpdateUser(data);
-  return result;
-}
+  findByUsername(username: string): Promise<Users | null> {
+    const user = this.repository.findByUsername(username);
+    if (user == null) {
+      return Promise.resolve(this.mapToDto(user));
+    } else {
+      return Promise.resolve(null);
+    } 
+  } 
+  protected mapToEntity(dto: Partial<Users>): IUser {
+    return dto as IUser;
+  }
 
+  protected mapToDto(entity: IUser): Users {
+    return entity as Users;
+  }
+}

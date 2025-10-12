@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import userRoutes from "./domain/routes/web.js"; // Đường dẫn router đã đổi
+import apiRouter from "./domain/routes/api.js"; // Đường dẫn router đã đổi
 import { initPool } from "./application/constant/databaseConnection.js";
 import { readOnly } from "./application/config/readPublic.js";
 
@@ -28,7 +28,7 @@ readOnly(app);
 })();
 
 // 🛣️ Khai báo route
-app.use("/users", userRoutes);
+app.use("/", apiRouter);
 
 // 🚀 Khởi động server
 const PORT = process.env.PORT || 3000;
