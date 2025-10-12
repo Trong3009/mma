@@ -1,18 +1,19 @@
 import bcrypt from 'bcryptjs';
 import { randomUUID } from 'crypto';
-import { IEntity } from '../../../application/core/IEntity.js';
+import { IEntity } from '../../core/IEntity.js';
+import { Gender, Role, Status } from '../../core/enum.js';
 
 export interface IUser extends IEntity<string> {
   username: string;
   password: string; // Mật khẩu gốc, sẽ hash khi tạo
   name?: string;
   address?: string;
-  gender?: number;
   birthdate?: Date;
   phone?: string;
   email?: string;
-  role?: number; // 1 = admin, 2 = manager, 3 = customer
-  status?: number; // 0 = active, 1 = inactive
+  gender?: Gender; // 0 = nữ, 1 = nam, 2 = khác
+  role?: Role; // 1 = admin, 2 = manager, 3 = customer
+  status?: Status; // 0 = active, 1 = inactive
   created_at?: Date;
   updated_at?: Date;
 }
@@ -25,8 +26,9 @@ export class Users implements IUser {
   address?: string;
   phone?: string;
   email?: string;
-  role?: number;
-  status?: number; // 0 = active, 1 = inactive
+  role?: Role;
+  gender?: Gender;
+  status?: Status; // 0 = active, 1 = inactive
   created_at?: Date;
   updated_at?: Date;
 
@@ -40,6 +42,7 @@ export class Users implements IUser {
     email,
     role,
     status,
+    gender,
     created_at,
     updated_at,
   }: IUser) {
@@ -50,6 +53,7 @@ export class Users implements IUser {
     this.address = address!;
     this.phone = phone!;
     this.email = email!;
+    this.gender = gender ?? 2; // mặc định 2: khác
     this.role = role ?? 3; // mặc định 3: khách hàng
     this.status = status ?? 0; // mặc định 1: hoạt động
     this.created_at = created_at ?? new Date();
