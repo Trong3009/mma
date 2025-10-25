@@ -3,6 +3,8 @@ import express from "express";
 import apiRouter from "./domain/routes/api.js"; // Đường dẫn router đã đổi
 import { initPool } from "./application/constant/databaseConnection.js";
 import { readOnly } from "./application/config/readPublic.js";
+import { AuthMiddleware } from "./api/middlerware/AuthMiddleware.js";
+import { LogMiddleware } from "./api/middlerware/LogMiddleware.js";
 
 // 🔧 Load .env theo môi trường
 dotenv.config({
@@ -26,6 +28,9 @@ readOnly(app);
     process.exit(1); // Dừng server nếu kết nối DB lỗi
   }
 })();
+
+app.use(AuthMiddleware);
+app.use(LogMiddleware);
 
 // 🛣️ Khai báo route
 app.use("/", apiRouter);

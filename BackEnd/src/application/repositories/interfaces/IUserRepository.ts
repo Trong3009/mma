@@ -12,18 +12,18 @@ export class UserRepository extends BaseCrudRepository<Users, string> implements
     super("USER", "NQT_USER");
   }
   async findByUsername(username: string): Promise<IUser | null> {
-    const conn = await oracledb.getConnection();
-    const query = `SELECT * FROM ${this.tableName} WHERE USERNAME = :username`;
-    const result = await conn.execute<{ USER_NAME: string }>(
-      query,
-      { username },
-      { outFormat: (oracledb as any).OUT_FORMAT_OBJECT }
-    );
-    await conn.close();
+  const conn = await oracledb.getConnection();
+  const query = `SELECT USER_ID, USERNAME, PASSWORD, ROLE FROM ${this.tableName} WHERE LOWER(USERNAME) = LOWER(:username)`;
+  const result = await conn.execute(
+    query,
+    { username },
+    { outFormat: (oracledb as any).OUT_FORMAT_OBJECT }
+  );
+  await conn.close();
 
-    const row = result.rows?.[0] as IUser | undefined;
-    return row || null;
-  }
+  const row = result.rows?.[0] as IUser | undefined;
+  return row || null;
+}
 
   async setAsync(entity: Users): Promise<Users> {
   const username = entity.username?.trim();
